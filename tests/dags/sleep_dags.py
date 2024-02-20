@@ -5,10 +5,10 @@ from time import sleep
 
 
 DAGS_ID_PREFIX = 'SLEEP'
-DAGS_COUNT = 10
+DAGS_COUNT = 20
 TASK_ID_PREFIX = 'TASK'
-TASK_COUNT = 10
-SLEEP_TIME = 10
+TASK_COUNT = 20
+SLEEP_TIME = 60
 
 
 def test_function_sleep(sec=SLEEP_TIME):
@@ -18,15 +18,14 @@ def test_function_sleep(sec=SLEEP_TIME):
 
 
 for di in range(DAGS_COUNT):
-    my_dag = DAG(
+    with DAG(
         f"{DAGS_ID_PREFIX}_{di}",
         start_date=datetime(2024, 2, 1),
         schedule='* * * * *',
         catchup=False,
-    )
-    for ti in range(TASK_COUNT):
-        python_task = PythonOperator(
-            dag=my_dag,
-            task_id=f"{TASK_ID_PREFIX}_{ti}",
-            python_callable=test_function_sleep,
-        )
+    ):
+        for ti in range(TASK_COUNT):
+            python_task = PythonOperator(
+                task_id=f"{TASK_ID_PREFIX}_{ti}",
+                python_callable=test_function_sleep,
+            )
