@@ -27,6 +27,6 @@ for di in range(DAGS_COUNT):
     for ti in range(TASK_COUNT):
         python_task = PythonOperator(
             dag=my_dag,
-            task_id=f"{TASK_ID_PREFIX}_{di}",
+            task_id=f"{TASK_ID_PREFIX}_{ti}",
             python_callable=test_function_sleep,
         )
