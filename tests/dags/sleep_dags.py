@@ -23,6 +23,8 @@ for di in range(DAGS_COUNT):
         start_date=datetime(2024, 2, 1),
         schedule='* * * * *',
         catchup=False,
+        max_active_runs=1,
+        max_active_tasks=100,
     ):
         for ti in range(TASK_COUNT):
             python_task = PythonOperator(
