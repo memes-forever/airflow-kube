@@ -24,7 +24,7 @@ for di in range(DAGS_COUNT):
         schedule='* * * * *',
         catchup=True,
         max_active_runs=2,
-        # max_active_tasks=16,
+        max_active_tasks=20,
     ):
         for ti in range(TASK_COUNT):
             python_task = PythonOperator(
