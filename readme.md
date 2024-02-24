@@ -11,13 +11,15 @@
 install minikube https://kubernetes.io/ru/docs/tasks/tools/install-minikube/
 ```shell
 # start cluster 
-minikube start --kubernetes-version=v1.23.12 --memory 6144 --cpus 4 # --vm-driver=docker
+minikube start --kubernetes-version=v1.23.12 --memory 12288 --cpus 6 # --vm-driver=docker
 
 # stop cluster
 minikube stop
 
 # (optional) dashboard
 minikube dashboard
+# disable dashboard
+minikube addons disable dashboard
 
 # load local image to minikube
 minikube docker-env
