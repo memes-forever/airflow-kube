@@ -7,8 +7,8 @@ from time import sleep
 DAGS_ID_PREFIX = 'SLEEP'
 DAGS_COUNT = 20
 TASK_ID_PREFIX = 'TASK'
-TASK_COUNT = 20
-SLEEP_TIME = 60
+TASK_COUNT = 100
+SLEEP_TIME = 10
 
 
 def test_function_sleep(sec=SLEEP_TIME):
@@ -22,9 +22,9 @@ for di in range(DAGS_COUNT):
         f"{DAGS_ID_PREFIX}_{di}",
         start_date=datetime(2024, 2, 1),
         schedule='* * * * *',
-        catchup=False,
-        max_active_runs=1,
-        max_active_tasks=100,
+        catchup=True,
+        max_active_runs=2,
+        # max_active_tasks=16,
     ):
         for ti in range(TASK_COUNT):
             python_task = PythonOperator(
